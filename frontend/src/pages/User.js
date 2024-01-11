@@ -1,12 +1,13 @@
 import React from "react";
 import Footer from "../components/Footer";
 import { NavLink } from "react-router-dom";
+import Navigation from "../components/Navigation";
 
 
 const User = () => {
   return (
     <div>
-        <nav class="main-nav">
+        {/* <nav class="main-nav">
           <a class="main-nav-logo" href="./index.html">
             <img
               class="main-nav-logo-image"
@@ -25,7 +26,8 @@ const User = () => {
                 <p className="main-nav-item">Sign Out</p>
             </NavLink>
           </div>
-        </nav>
+        </nav> */}
+        <Navigation />
         <main class="main bg-dark">
           <div class="header">
             <h1>
