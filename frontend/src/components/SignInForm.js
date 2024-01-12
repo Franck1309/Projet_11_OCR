@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 
 const SignInForm = () => {
-  const form = useRef(); // Récupère les éléments du form
 
   return (
     <main className="main bg-dark">

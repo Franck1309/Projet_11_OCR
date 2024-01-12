@@ -13,7 +13,11 @@ const Navigation = () => {
           />
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
-        <div>
+        <div className="contentFlex">
+          <p class="main-nav-item">
+            <i class="fa fa-user-circle"></i>
+            Name
+          </p>
           <NavLink to="/SignIn">
             <p className="main-nav-item">
               <i className="fa fa-user-circle"></i>
