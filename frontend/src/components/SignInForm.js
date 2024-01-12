@@ -1,31 +1,42 @@
 import React, { useRef } from "react";
-import { NavLink } from "react-router-dom";
-
-
+import { useDispatch } from "react-redux";
+import { userPosts } from "../actions/post.action";
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Récupérer les valeurs des champs
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    // Appeler l'action userPosts avec les données du formulaire
+    dispatch(userPosts({ email, password }));
+  };
 
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
-            <label for="username">Username</label>
-            <input type="text" id="username" />
+            <label htmlFor="username">Username</label>
+            <input type="text" id="username" ref={emailRef} />
           </div>
           <div className="input-wrapper">
-            <label for="password">Password</label>
-            <input type="password" id="password" />
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" ref={passwordRef} />
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
-            <label for="remember-me">Remember me</label>
+            <label htmlFor="remember-me">Remember me</label>
           </div>
-          <NavLink to="/User">
-            <p className="sign-in-button"> Sign In</p>
-          </NavLink>
+          <button type="submit" className="sign-in-button">Sign In</button>
         </form>
       </section>
     </main>
