@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import Account from "../components/Account";
-
+import { useDispatch, useSelector } from "react-redux";
+import { userData } from "../actions/userData.action";
 
 const User = () => {
+
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.postReducer.body.token)
+
+  useEffect(() => {
+    if (token) {
+      dispatch(userData(token));
+    }
+  }, [dispatch, token]);
+
+  const dataUserLog = useSelector((state) => state.userReducer)
+  console.log(dataUserLog);
+
   return (
     <div>
         <Navigation />
@@ -13,7 +27,7 @@ const User = () => {
             <h1>
               Welcome back
               <br />
-              Tony Jarvis!
+              {dataUserLog.firstName}  {dataUserLog.lastName} !
             </h1>
             <button className="edit-button">Edit Name</button>
           </div>
