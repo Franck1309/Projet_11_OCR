@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 const SignIn = () => {
   return (
     <div>
-      <Navigation />
+      <Navigation text=" Sign In"/>
       <SignInForm />
       <Footer />
     </div>

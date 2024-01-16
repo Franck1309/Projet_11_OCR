@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const USER_DATA = "USER_DATA";
+export const SIGN_OUT =  "SIGN_OUT"
 
 export const userData = (token) => (dispatch) => {
   return axios
@@ -15,4 +16,10 @@ export const userData = (token) => (dispatch) => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+export const signOut = () => {
+  return {
+    type: "SIGN_OUT",
+  };
 };

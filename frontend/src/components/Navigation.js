@@ -1,7 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signOut } from "../actions/userData.action";
 
-const Navigation = () => {
+const Navigation = ({ text, name, onSignOut }) => {
+  const location = useLocation();
+  const isUserPage = location.pathname === "/user";
+  const dispatch = useDispatch();
+
+  const handleSignOut = () => {
+    onSignOut ? onSignOut() : dispatch(signOut());
+  };
+
   return (
     <div>
       <nav className="main-nav">
@@ -14,15 +24,16 @@ const Navigation = () => {
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
         <div className="contentFlex">
-          <p className="main-nav-item">
-            <i className="fa fa-user-circle"></i>
-            Name
-          </p>
-          <NavLink to="/SignIn">
-            <p className="main-nav-item">
+          {isUserPage && (
+            <p key="username" className="main-nav-item">
               <i className="fa fa-user-circle"></i>
-              Sign In
+              <span> </span>
+              {name}
             </p>
+          )}
+          <NavLink to="/SignIn" className="main-nav-item" onClick={handleSignOut}>
+            <i className="fa fa-user-circle"></i>
+            {text}
           </NavLink>
         </div>
       </nav>
@@ -31,3 +42,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

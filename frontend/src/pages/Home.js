@@ -7,7 +7,7 @@ import FeatureItem from "../components/FeatureItem";
 const Home = () => {
   return (
     <div>
-      <Navigation />
+      <Navigation text=" Sign In"/>
       <Banner />
       <div className="features content-features">
         <FeatureItem
