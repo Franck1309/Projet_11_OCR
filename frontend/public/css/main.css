@@ -28,6 +28,7 @@ body {
 .bg-dark {
   background-color: #12002b;
   padding: 10px;
+  margin-bottom: -0.5px;
 }
 
 .sr-only {
@@ -210,6 +211,7 @@ body {
   margin: 5px ;
   padding: 5px;
   font-size: 1.2rem;
+  border: 1px solid black;
 }
 
 .footer {

@@ -15,7 +15,7 @@ const Navigation = () => {
 
   useEffect(() => {
     // Au montage du composant j'enregistre les infos user
-    if (tokenLocal) {
+    if (tokenLocal !== "undefined") {
       dispatch(userData(tokenLocal));
     }
   }, [dispatch, tokenLocal]);
