@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const USER_DATA = "USER_DATA";
-export const SIGN_OUT =  "SIGN_OUT";
+export const SIGN_OUT = "SIGN_OUT";
 export const USER_EDIT = "USER_EDIT";
 
 export const userPosts = (userData) => {
@@ -28,29 +28,26 @@ export const userData = (token) => (dispatch) => {
     })
     .then((response) => {
       dispatch({ type: USER_DATA, payload: response.data });
-      window.localStorage.setItem("userData", JSON.stringify(response.data.body));
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
-export const userEdit = (token) => (dispatch) => {
+export const userEdit = (token, updatedUserData) => (dispatch) => {
   return axios
-    .put("http://localhost:3001/api/v1/user/profile", null, {
+    .put("http://localhost:3001/api/v1/user/profile", updatedUserData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
     .then((response) => {
       dispatch({ type: USER_EDIT, payload: response.data });
-      window.localStorage.setItem("userData", JSON.stringify(response.data.body));
     })
     .catch((error) => {
       console.log(error);
     });
 };
-
 
 export const signOut = () => {
   return {
