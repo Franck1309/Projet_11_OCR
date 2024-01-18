@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers";
 
-
 // Création du store
 const store = configureStore({
   reducer: rootReducer,

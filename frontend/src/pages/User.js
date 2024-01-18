@@ -2,34 +2,13 @@ import React, { useEffect } from "react";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import Account from "../components/Account";
-import { useDispatch, useSelector } from "react-redux";
-import { signOut, userData } from "../actions/userData.action";
+import { useSelector } from "react-redux";
 
 const User = () => {
-  const dispatch = useDispatch();
-  let tokenLocal = window.localStorage.getItem("tokenLocal"); // Récupération du token au localStorage
   const dataUserLog = useSelector((state) => state.userReducer); // Récupération de userData au store
-
-  const handleSignOut = () => {
-    // fonction de déconnexion user
-    dispatch(signOut());
-    window.localStorage.setItem("tokenLocal", "undefined");
-  };
-
-  useEffect(() => {
-    // Au montage du composant j'enregistre les infos user
-    if (tokenLocal) {
-      dispatch(userData(tokenLocal));
-    }
-  }, [dispatch, tokenLocal]);
-
   return (
     <div>
-      <Navigation
-        text=" Sign Out"
-        name={dataUserLog.userName}
-        onSignOut={handleSignOut}
-      />
+      <Navigation />
       <main className="main bg-dark">
         <div className="header">
           <h1>

@@ -27,6 +27,7 @@ export const userData = (token) => (dispatch) => {
     })
     .then((response) => {
       dispatch({ type: USER_DATA, payload: response.data });
+      window.localStorage.setItem("userData", JSON.stringify(response.data.body));
     })
     .catch((error) => {
       console.log(error);

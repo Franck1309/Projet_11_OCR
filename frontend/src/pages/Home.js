@@ -4,10 +4,12 @@ import Footer from "../components/Footer";
 import Banner from "../components/Banner";
 import FeatureItem from "../components/FeatureItem";
 
+
 const Home = () => {
+
   return (
     <div>
-      <Navigation text=" Sign In"/>
+      <Navigation />
       <Banner />
       <div className="features content-features">
         <FeatureItem

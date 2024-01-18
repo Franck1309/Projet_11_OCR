@@ -1,16 +1,24 @@
-import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { signOut } from "../actions/userData.action";
+import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut, userData } from "../actions/userData.action";
 
-const Navigation = ({ text, name, onSignOut }) => {
-  const location = useLocation();
-  const isUserPage = location.pathname === "/user";
+const Navigation = () => {
   const dispatch = useDispatch();
+  const tokenLocal = window.localStorage.getItem("tokenLocal");
+  const dataUserLog = useSelector((state) => state.userReducer); // Récupération de userData au store
 
   const handleSignOut = () => {
-    onSignOut ? onSignOut() : dispatch(signOut());
+    dispatch(signOut());
+    window.localStorage.setItem("tokenLocal", "undefined");
   };
+
+  useEffect(() => {
+    // Au montage du composant j'enregistre les infos user
+    if (tokenLocal) {
+      dispatch(userData(tokenLocal));
+    }
+  }, [dispatch, tokenLocal]);
 
   return (
     <div>
@@ -24,16 +32,25 @@ const Navigation = ({ text, name, onSignOut }) => {
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
         <div className="contentFlex">
-          {isUserPage && (
-            <p key="username" className="main-nav-item">
+          {tokenLocal !== "undefined" && (
+            <NavLink to="/user" className="main-nav-item">
+              <p className="main-nav-item">
+                <i className="fa fa-user-circle"></i>
+                <span> </span>
+                {dataUserLog.userName}
+              </p>
+            </NavLink>
+          )}
+          <NavLink
+            to="/SignIn"
+            className="main-nav-item"
+            onClick={handleSignOut}
+          >
+            <p>
               <i className="fa fa-user-circle"></i>
               <span> </span>
-              {name}
+              {tokenLocal !== "undefined" ? "Sign Out" : "Sign In"}
             </p>
-          )}
-          <NavLink to="/SignIn" className="main-nav-item" onClick={handleSignOut}>
-            <i className="fa fa-user-circle"></i>
-            {text}
           </NavLink>
         </div>
       </nav>
@@ -42,4 +59,3 @@ const Navigation = ({ text, name, onSignOut }) => {
 };
 
 export default Navigation;
-
